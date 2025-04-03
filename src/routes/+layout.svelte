@@ -1,7 +1,9 @@
 <script lang="ts">
 	import '../app.css';
 
-	let { children } = $props();
+	let isModalOpen = $state(false);
+
+	let { data, children } = $props();
 </script>
 
 <div class="navbar bg-base-100 shadow-sm">
@@ -37,6 +39,30 @@
 		<a class="btn btn-ghost text-xl" href="/">sunnypilot</a>
 	</div>
 	<div class="navbar-end">
+		<form method="POST" action="?/{data.user ? 'signOut' : 'signIn'}" class="px-5">
+			<button type="submit">Sign {data.user ? 'out' : 'in'}</button>
+		</form>
+		<button class="btn" onclick={() => (isModalOpen = !isModalOpen)}>Change Driving Model</button>
+
+		<dialog id="my_modal_1" class="modal" class:modal-open={isModalOpen}>
+			<div class="modal-box">
+				<h3 class="text-lg font-bold">Change Driving Modal</h3>
+				<p class="py-4">
+					<select class="select">
+						<option disabled selected>Device</option>
+						<option></option>
+						<option>Amber</option>
+						<option>Velvet</option>
+					</select>
+				</p>
+				<div class="modal-action">
+					<form method="dialog">
+						<!-- if there is a button in form, it will close the modal -->
+						<button class="btn" onclick={() => (isModalOpen = !isModalOpen)}>Close</button>
+					</form>
+				</div>
+			</div>
+		</dialog>
 		<button class="btn btn-ghost btn-circle" aria-label="notification">
 			<div class="indicator">
 				<svg
@@ -53,6 +79,7 @@
 						d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
 					/>
 				</svg>
+
 				<span class="badge badge-xs badge-primary indicator-item"></span>
 			</div>
 		</button>

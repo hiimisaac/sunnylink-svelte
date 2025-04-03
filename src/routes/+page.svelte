@@ -1,5 +1,7 @@
 <script>
 	import img from '$lib/images/smiling-astro.png';
+
+	export let data;
 </script>
 
 <div class="bg-base-200 min-h-screen">
