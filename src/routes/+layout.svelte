@@ -1,9 +1,28 @@
 <script lang="ts">
+	import { createAuthMiddleware } from '$lib/api/auth';
+	import { sunnylinkClient } from '$lib/api/client';
+	import type { Device } from '$lib/types/types';
+	import type { Middleware } from 'openapi-fetch';
 	import '../app.css';
 
 	let isModalOpen = $state(false);
+	let allDevices = $state<Device>([]);
 
 	let { data, children } = $props();
+
+	async function checkForSubmit(e: MouseEvent) {
+		if (data.user) {
+			e.preventDefault();
+			isModalOpen = !isModalOpen;
+			const authMiddleware = createAuthMiddleware(data.token);
+			sunnylinkClient.use(authMiddleware);
+			const devices = await sunnylinkClient.GET('/users/{userId}/devices', {
+				params: { path: { userId: 'self' } }
+			});
+			console.log(devices);
+			allDevices = devices.data!;
+		}
+	}
 </script>
 
 <div class="navbar bg-base-100 shadow-sm">
@@ -40,20 +59,25 @@
 	</div>
 	<div class="navbar-end">
 		<form method="POST" action="?/{data.user ? 'signOut' : 'signIn'}" class="px-5">
-			<button type="submit">Sign {data.user ? 'out' : 'in'}</button>
+			<button class="btn btn-ghost" type="submit" onclick={(event) => checkForSubmit(event)}
+				>Change Driving Model</button
+			>
 		</form>
-		<button class="btn" onclick={() => (isModalOpen = !isModalOpen)}>Change Driving Model</button>
 
 		<dialog id="my_modal_1" class="modal" class:modal-open={isModalOpen}>
 			<div class="modal-box">
 				<h3 class="text-lg font-bold">Change Driving Modal</h3>
 				<p class="py-4">
-					<select class="select">
-						<option disabled selected>Device</option>
-						<option></option>
-						<option>Amber</option>
-						<option>Velvet</option>
-					</select>
+					{#if allDevices.length >= 1}
+						<select class="select">
+							<option disabled selected>Device</option>
+							{#each allDevices as device}
+								<option value={device.device_id}>{device.device_id}</option>
+							{/each}
+						</select>
+					{:else}
+						No devices found
+					{/if}
 				</p>
 				<div class="modal-action">
 					<form method="dialog">

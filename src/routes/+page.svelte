@@ -1,7 +1,5 @@
 <script>
 	import img from '$lib/images/smiling-astro.png';
-
-	export let data;
 </script>
 
 <div class="bg-base-200 min-h-screen">
@@ -108,7 +106,9 @@
 			<div class="badge badge-soft badge-success badge-xl">Features</div>
 		</div>
 	</div>
-	<div class="mx-auto grid w-full grid-cols-3 place-items-center justify-center xl:max-w-3/5">
+	<div
+		class="mx-auto grid w-full grid-cols-3 place-items-center justify-center gap-x-15 xl:max-w-3/5"
+	>
 		<div class="card bg-base-100 w-96 shadow-sm">
 			<figure class="px-10 pt-10">
 				<img
@@ -118,11 +118,11 @@
 				/>
 			</figure>
 			<div class="card-body items-center text-center">
-				<h2 class="card-title">Dynamic Experimental Control</h2>
+				<h2 class="card-title max-h-24 min-h-24">Dynamic Experimental Control</h2>
 				<p>
-					Intelligently shift between ACC and Experimental Mode for the smoothest longitudinal
-					control. Enhanced stopping for things like red lights and stop signs while maintaining
-					your set speed in most other scenarios!
+					Seamlessly switch between ACC and Experimental Mode for smooth longitudinal control. Enjoy
+					better stopping at red lights and stop signs while keeping your set speed elsewhere. This
+					smart feature optimizes your driving experience effortlessly.
 				</p>
 				<div class="card-actions"></div>
 			</div>
@@ -136,11 +136,11 @@
 				/>
 			</figure>
 			<div class="card-body items-center text-center">
-				<h2 class="card-title">MADS</h2>
+				<h2 class="card-title max-h-24 min-h-24">MADS</h2>
 				<p>
-					Lateral Control and Longitudinal Control are able to be engaged/disengaged independently
-					of one another! This allows your vehicle to steer while you control the gas/brake or your
-					vehicle can control gas/break while you steer!
+					Toggle Lateral and Longitudinal Control independently! Let your vehicle steer while you
+					handle gas and brake, or let it manage acceleration and braking while you steer. This
+					flexibility enhances your driving control seamlessly.
 				</p>
 				<div class="card-actions"></div>
 			</div>
@@ -154,11 +154,11 @@
 				/>
 			</figure>
 			<div class="card-body items-center text-center">
-				<h2 class="card-title">Forced Car Recognition</h2>
+				<h2 class="card-title max-h-24 min-h-24">Forced Car Recognition</h2>
 				<p>
-					Avoid the headaches of new ECU firmware versions after recalls and software OTAs! Force
-					sunnypilot to recognize your vehicle everytime you start sunnypilot. This allows you to
-					bypass those mornings where your car is not recognized due to an OTA
+					Eliminate issues from ECU updates after recalls or OTAs! Forced Car Recognition ensures
+					sunnypilot identifies your vehicle at every start. Avoid frustrating mornings when your
+					car isn’t detected due to software changes effortlessly.
 				</p>
 				<div class="card-actions"></div>
 			</div>

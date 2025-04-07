@@ -17,6 +17,7 @@
     "npm:eslint@^9.18.0": "9.23.0",
     "npm:globals@16": "16.0.0",
     "npm:jsdom@26": "26.0.0",
+    "npm:openapi-fetch@~0.13.5": "0.13.5",
     "npm:openapi-typescript@^7.6.1": "7.6.1_typescript@5.8.2",
     "npm:prettier-plugin-svelte@^3.3.3": "3.3.3_prettier@3.5.3_svelte@5.25.5__acorn@8.14.1",
     "npm:prettier-plugin-tailwindcss@~0.6.11": "0.6.11_prettier@3.5.3_prettier-plugin-svelte@3.3.3__prettier@3.5.3__svelte@5.25.5___acorn@8.14.1_svelte@5.25.5__acorn@8.14.1",
@@ -26,7 +27,6 @@
     "npm:tailwindcss@4": "4.0.17",
     "npm:typescript-eslint@^8.20.0": "8.29.0_eslint@9.23.0_typescript@5.8.2_@typescript-eslint+parser@8.29.0__eslint@9.23.0__typescript@5.8.2",
     "npm:typescript@5": "5.8.2",
-    "npm:up-fetch@^2.0.1": "2.0.1",
     "npm:vite@6": "6.2.4_lightningcss@1.29.2",
     "npm:vitest@3": "3.1.1_jsdom@26.0.0_vite@6.2.4",
     "npm:zod@^3.24.2": "3.24.2"
@@ -1635,6 +1635,15 @@
     "nwsapi@2.2.20": {
       "integrity": "sha512-/ieB+mDe4MrrKMT8z+mQL8klXydZWGR5Dowt4RAGKbJ3kIGEx3X4ljUo+6V73IXtUPWgfOlU5B9MlGxFO5T+cA=="
     },
+    "openapi-fetch@0.13.5": {
+      "integrity": "sha512-AQK8T9GSKFREFlN1DBXTYsLjs7YV2tZcJ7zUWxbjMoQmj8dDSFRrzhLCbHPZWA1TMV3vACqfCxLEZcwf2wxV6Q==",
+      "dependencies": [
+        "openapi-typescript-helpers"
+      ]
+    },
+    "openapi-typescript-helpers@0.0.15": {
+      "integrity": "sha512-opyTPaunsklCBpTK8JGef6mfPhLSnyy5a0IN9vKtx3+4aExf+KxEqYwIy3hqkedXIB97u357uLMJsOnm3GVjsw=="
+    },
     "openapi-typescript@7.6.1_typescript@5.8.2": {
       "integrity": "sha512-F7RXEeo/heF3O9lOXo2bNjCOtfp7u+D6W3a3VNEH2xE6v+fxLtn5nq0uvUcA1F5aT+CMhNeC5Uqtg5tlXFX/ag==",
       "dependencies": [
@@ -2047,9 +2056,6 @@
     "typescript@5.8.2": {
       "integrity": "sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ=="
     },
-    "up-fetch@2.0.1": {
-      "integrity": "sha512-zMKd190bGhaWAF7gHokHckl5OT8E387Gjdny1doEClf1P/vfXYjK92LgTWgBuEipOM45bMETsbNqAafmoboQmQ=="
-    },
     "uri-js-replace@1.0.1": {
       "integrity": "sha512-W+C9NWNLFOoBI2QWDp4UT9pv65r2w5Cx+3sTYFvtMdDBxkKt1syCqsUdSFAChbEe1uK5TfS04wt/nGwmaeIQ0g=="
     },
@@ -2217,6 +2223,7 @@
         "npm:eslint@^9.18.0",
         "npm:globals@16",
         "npm:jsdom@26",
+        "npm:openapi-fetch@~0.13.5",
         "npm:openapi-typescript@^7.6.1",
         "npm:prettier-plugin-svelte@^3.3.3",
         "npm:prettier-plugin-tailwindcss@~0.6.11",
@@ -2226,7 +2233,6 @@
         "npm:tailwindcss@4",
         "npm:typescript-eslint@^8.20.0",
         "npm:typescript@5",
-        "npm:up-fetch@^2.0.1",
         "npm:vite@6",
         "npm:vitest@3",
         "npm:zod@^3.24.2"
