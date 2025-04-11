@@ -1,5 +1,4 @@
 import type { Actions } from './$types';
-import { Buffer } from 'buffer';
 
 export const actions: Actions = {
 	signIn: async ({ locals }) => {

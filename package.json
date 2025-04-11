@@ -24,6 +24,7 @@
 		"openapi-typescript": "^7.6.1",
 		"svelte-sonner": "^0.3.28",
 		"sveltekit-adapter-deno": "^0.16.1",
+		"vite-plugin-node-polyfills": "^0.23.0",
 		"zod": "^3.24.2"
 	},
 	"devDependencies": {
