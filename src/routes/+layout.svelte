@@ -1,12 +1,14 @@
 <script lang="ts">
 	import { createAuthMiddleware } from '$lib/api/auth';
 	import { sunnylinkClient } from '$lib/api/client';
-	import type { Device } from '$lib/types/types';
-	import type { Middleware } from 'openapi-fetch';
+	import { Toaster, toast } from 'svelte-sonner';
+	import { type Device } from '$lib/types/types';
 	import '../app.css';
 
 	let isModalOpen = $state(false);
 	let allDevices = $state<Device>([]);
+	let selectedModel = $state<number>();
+	let selectedDevice = $state<string>();
 
 	let { data, children } = $props();
 
@@ -19,12 +21,41 @@
 			const devices = await sunnylinkClient.GET('/users/{userId}/devices', {
 				params: { path: { userId: 'self' } }
 			});
-			console.log(devices);
 			allDevices = devices.data!;
+		}
+	}
+
+	async function sendNewModelToDevice() {
+		try {
+			const response = await sunnylinkClient.POST('/settings/{deviceId}', {
+				params: {
+					path: {
+						deviceId: selectedDevice ?? ''
+					}
+				},
+				body: [
+					{
+						key: 'ModelManager_DownloadIndex',
+						value: btoa(selectedModel?.toString() ?? ''),
+						is_compressed: false
+					}
+				]
+			});
+
+			if (response.error) {
+				throw new Error(`HTTP error! Status: ${response.error.detail}`);
+			}
+			isModalOpen = !isModalOpen;
+
+			toast.success('New Model loaded. Drive safely! 🚗💨');
+		} catch (error) {
+			toast.error('Ah nuts 🔩. We encountered an error');
+			console.error('Error:', error);
 		}
 	}
 </script>
 
+<Toaster richColors />
 <div class="navbar bg-base-100 shadow-sm">
 	<div class="navbar-start">
 		<div class="dropdown">
@@ -69,7 +100,7 @@
 				<h3 class="text-lg font-bold">Change Driving Modal</h3>
 				<p class="py-4">
 					{#if allDevices.length >= 1}
-						<select class="select">
+						<select class="select" bind:value={selectedDevice}>
 							<option disabled selected>Device</option>
 							{#each allDevices as device}
 								<option value={device.device_id}>{device.device_id}</option>
@@ -79,10 +110,23 @@
 						No devices found
 					{/if}
 				</p>
+				<p>
+					{#if data.models}
+						<select class="select" bind:value={selectedModel}>
+							<option disabled selected>Model</option>
+							{#each data.models as validatedModels}
+								<option value={validatedModels.index}>{validatedModels.display_name}</option>
+							{/each}
+						</select>
+					{/if}
+				</p>
 				<div class="modal-action">
 					<form method="dialog">
 						<!-- if there is a button in form, it will close the modal -->
 						<button class="btn" onclick={() => (isModalOpen = !isModalOpen)}>Close</button>
+						<button class="btn btn-primary" onclick={async () => await sendNewModelToDevice()}
+							>Send it 🚀</button
+						>
 					</form>
 				</div>
 			</div>

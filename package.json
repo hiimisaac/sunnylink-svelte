@@ -14,12 +14,14 @@
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run && npm run test:e2e",
-		"test:e2e": "playwright test"
+		"test:e2e": "playwright test",
+		"gen-types": "npx openapi-typescript https://docs.sunnypilot.ai/driving_models.json -o .src/lib/types/generated/model-schema.d.ts"
 	},
 	"dependencies": {
 		"@logto/sveltekit": "^0.3.16",
 		"openapi-fetch": "^0.13.5",
 		"openapi-typescript": "^7.6.1",
+		"svelte-sonner": "^0.3.28",
 		"zod": "^3.24.2"
 	},
 	"devDependencies": {
