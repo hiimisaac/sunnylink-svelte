@@ -37,7 +37,7 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "isaacbarham-sunnylink-s-14"
+          project: "sunnylink-svelte"
           entrypoint: "mod.ts"
           root: "build"
           
