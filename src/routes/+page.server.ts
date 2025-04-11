@@ -1,3 +1,4 @@
+import { env } from '$env/dynamic/private';
 import type { Actions } from './$types';
 import { Buffer } from 'node:buffer';
 
@@ -7,8 +8,8 @@ export const actions: Actions = {
 	signIn: async ({ locals }) => {
 		// Or use the following code to redirect after the callback is done.
 		await locals.logtoClient.signIn({
-			redirectUri: 'http://localhost:5173/callback',
-			postRedirectUri: 'http://localhost:5173/'
+			redirectUri: env.LOGTO_REDIRECT,
+			postRedirectUri: env.LOGTO_ENDPOINT
 		});
 	},
 	signOut: async ({ locals }) => {
