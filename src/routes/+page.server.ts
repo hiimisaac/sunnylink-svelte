@@ -1,4 +1,7 @@
 import type { Actions } from './$types';
+import { Buffer } from 'node:buffer';
+
+globalThis.Buffer = Buffer;
 
 export const actions: Actions = {
 	signIn: async ({ locals }) => {
