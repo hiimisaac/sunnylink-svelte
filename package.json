@@ -19,6 +19,7 @@
 	},
 	"dependencies": {
 		"@logto/sveltekit": "^0.3.16",
+		"buffer": "^6.0.3",
 		"openapi-fetch": "^0.13.5",
 		"openapi-typescript": "^7.6.1",
 		"svelte-sonner": "^0.3.28",
