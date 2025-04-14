@@ -1,10 +1,10 @@
-import { env } from '$env/dynamic/private';
+import { LOGTO_REDIRECT, env } from '$env/dynamic/private';
 import type { Actions } from './$types';
 
 export const actions: Actions = {
 	signIn: async ({ locals }) => {
 		await locals.logtoClient.signIn({
-			redirectUri: env.LOGTO_REDIRECT,
+			redirectUri: LOGTO_REDIRECT,
 			postRedirectUri: '/'
 		});
 	},
