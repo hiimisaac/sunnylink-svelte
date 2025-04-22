@@ -1,6 +1,6 @@
 // src/routes/callback/+page.server.ts
 import { redirect } from '@sveltejs/kit';
-import { logtoConfig } from '$lib/logto';
+import { env } from '$env/dynamic/private';
 
 export async function load({ url, fetch }) {
 	try {
@@ -12,25 +12,25 @@ export async function load({ url, fetch }) {
 			code,
 			state,
 			iss,
-			redirectUri: logtoConfig.redirectUri,
-			clientId: logtoConfig.clientId
+			redirectUri: env.LOGTO_REDIRECT,
+			clientId: env.LOGTO_APP_ID
 		});
 
 		// Validate issuer
 		if (iss !== logtoConfig.endpoint) {
-			throw new Error(`Invalid issuer: expected ${logtoConfig.endpoint}, got ${iss}`);
+			throw new Error(`Invalid issuer: expected ${env.LOGTO_ENDPOINT}, got ${iss}`);
 		}
 
 		// Perform token exchange
-		const tokenResponse = await fetch(`${logtoConfig.endpoint}/token`, {
+		const tokenResponse = await fetch(`${env.LOGTO_ENDPOINT}/token`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: new URLSearchParams({
 				grant_type: 'authorization_code',
 				code,
-				client_id: logtoConfig.clientId,
-				client_secret: logtoConfig.clientSecret,
-				redirect_uri: logtoConfig.redirectUri
+				client_id: env.LOGTO_APP_ID,
+				client_secret: env.LOGTO_APP_SECRET,
+				redirect_uri: env.LOGTO_REDIRECT
 			})
 		});
 
