@@ -14,6 +14,8 @@ import { env } from '$env/dynamic/private';
 // );
 
 export const handle = async ({ event, resolve }) => {
+	const isCallback = event.url.pathname === '/callback';
+
 	// Log incoming request details
 	console.log('Handling request:', {
 		pathname: event.url.pathname,
@@ -28,6 +30,16 @@ export const handle = async ({ event, resolve }) => {
 			scopes: [UserScope.Identities]
 		}
 	});
+
+	if (isCallback) {
+		try {
+			const jwksResponse = await fetch(`${env.LOGTO_ENDPOINT}/jwks`);
+			const jwksData = await jwksResponse.json();
+			console.log('JWKS fetch result:', jwksData);
+		} catch (jwksError) {
+			console.error('JWKS fetch error:', jwksError.message);
+		}
+	}
 
 	try {
 		// Call handleLogto
@@ -53,12 +65,14 @@ export const handle = async ({ event, resolve }) => {
 
 		return response;
 	} catch (error) {
-		// Log any errors
+		// Log error details
 		console.error('Logto error:', {
 			message: error.message,
 			stack: error.stack,
 			url: event.url.toString(),
-			queryParams: Object.fromEntries(event.url.searchParams)
+			isCallback,
+			queryParams: isCallback ? Object.fromEntries(event.url.searchParams) : null,
+			cookies: event.cookies.getAll()
 		});
 		throw error; // Let SvelteKit handle the error or redirect
 	}
