@@ -12,3 +12,8 @@ export const handle = handleLogto(
 		encryptionKey: env.LOGTO_COOKIE_ENCRYPTION_KEY ?? ''
 	}
 );
+
+console.log(env.LOGTO_APP_ID);
+console.log(env.LOGTO_ENDPOINT);
+console.log(env.LOGTO_APP_SECRET);
+console.log(env.LOGTO_COOKIE_ENCRYPTION_KEY);
