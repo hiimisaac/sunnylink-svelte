@@ -3,6 +3,6 @@
 	publish = "build"
 
 [[redirects]]
-  from = "/callback/*"
-  to = "/.netlify/functions/__render"
+  from = "/*"
+  to = "/index.html"
   status = 200
