@@ -3,6 +3,6 @@
 	publish = "build"
 
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/callback"
+  to = "/"
   status = 200
