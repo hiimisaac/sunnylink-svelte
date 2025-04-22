@@ -1,4 +1,4 @@
-import { Actions } from '../../.svelte-kit/types/src/routes/$types.d.ts';
+import type { Actions } from '@sveltejs/kit';
 
 export const actions: Actions = {
 	signIn: async ({ locals }) => {
