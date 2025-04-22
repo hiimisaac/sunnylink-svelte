@@ -1,19 +1,29 @@
 // src/routes/callback/+page.server.ts
 import { redirect } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
+import crypto from 'crypto';
 
 export async function load({ url, fetch }) {
+	function generateCodeVerifier() {
+		return crypto.randomBytes(32).toString('base64url');
+	}
+
+	function generateCodeChallenge(verifier) {
+		return crypto.createHash('sha256').update(verifier).digest('base64url');
+	}
+
 	try {
 		const code = url.searchParams.get('code');
 		const state = url.searchParams.get('state');
 		const iss = url.searchParams.get('iss');
 
 		console.log('Manual callback params:', {
-			code,
-			state,
+			code: code ? '[redacted]' : null,
+			state: state ? '[redacted]' : null,
 			iss,
 			redirectUri: env.LOGTO_REDIRECT,
-			clientId: env.LOGTO_APP_ID
+			clientId: env.LOGTO_APP_ID,
+			endpoint: env.LOGTO_ENDPOINT
 		});
 
 		// Validate issuer
