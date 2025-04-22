@@ -3,7 +3,7 @@ import { Actions } from '../../.svelte-kit/types/src/routes/$types.d.ts';
 export const actions: Actions = {
 	signIn: async ({ locals }) => {
 		await locals.logtoClient.signIn({
-			redirectUri: '/',
+			redirectUri: 'https://sunnylink-svelte.netlify.app/callback',
 			postRedirectUri: '/'
 		});
 	},
