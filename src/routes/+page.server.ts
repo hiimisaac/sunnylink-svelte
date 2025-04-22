@@ -1,5 +1,5 @@
-import { LOGTO_REDIRECT, NODE_ENV } from '$env/static/private';
-import type { Actions } from './$types';
+import { LOGTO_REDIRECT, NODE_ENV } from '$env/dynamic/private';
+import { Actions } from '../../.svelte-kit/types/src/routes/$types.d.ts';
 
 export const actions: Actions = {
 	signIn: async ({ locals }) => {
