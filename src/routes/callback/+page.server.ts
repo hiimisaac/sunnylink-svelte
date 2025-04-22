@@ -17,7 +17,7 @@ export async function load({ url, fetch }) {
 		});
 
 		// Validate issuer
-		if (iss !== logtoConfig.endpoint) {
+		if (iss !== env.LOGTO_ENDPOINT) {
 			throw new Error(`Invalid issuer: expected ${env.LOGTO_ENDPOINT}, got ${iss}`);
 		}
 
