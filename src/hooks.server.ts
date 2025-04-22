@@ -32,12 +32,17 @@ export const handle = async ({ event, resolve }) => {
 	try {
 		// Call handleLogto
 
-		const response = await handleLogto({
-			endpoint: env.LOGTO_ENDPOINT,
-			appId: env.LOGTO_APP_ID,
-			appSecret: env.LOGTO_APP_SECRET,
-			scopes: [UserScope.Identities]
-		})({ event, resolve });
+		const response = await handleLogto(
+			{
+				endpoint: env.LOGTO_ENDPOINT,
+				appId: env.LOGTO_APP_ID,
+				appSecret: env.LOGTO_APP_SECRET,
+				scopes: [UserScope.Identities]
+			},
+			{
+				encryptionKey: env.LOGTO_COOKIE_ENCRYPTION_KEY ?? ''
+			}
+		)({ event, resolve });
 
 		// Log response details
 		console.log('Logto response:', {
