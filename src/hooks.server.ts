@@ -1,5 +1,4 @@
 import { handleLogto, UserScope } from '@logto/sveltekit';
-import type { HandleServerError } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 
 export const handle = handleLogto(
@@ -14,11 +13,4 @@ export const handle = handleLogto(
 	}
 );
 
-export const handleError: HandleServerError = async ({ error, event, status, message }) => {
-	const errorId = crypto.randomUUID();
-
-	return {
-		message: message,
-		errorId
-	};
-};
+console.log(handle);
