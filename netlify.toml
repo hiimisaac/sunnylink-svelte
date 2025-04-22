@@ -2,7 +2,3 @@
 	command = "pnpm run build"
 	publish = "build"
 
-[[redirects]]
-  from = "/callback"
-  to = "/"
-  status = 200
