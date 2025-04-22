@@ -6,7 +6,11 @@ declare global {
 			logtoClient: LogtoClient;
 			user?: UserInfoResponse;
 		}
+		interface Error {
+			message: string;
+			errorId: string;
+		}
 	}
 }
 
-export { };
+export {};
