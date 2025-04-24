@@ -3,8 +3,6 @@ import { type Model } from '$lib/types/types';
 
 export const load: LayoutServerLoad = async ({ locals }) => {
 	const token = (await locals.logtoClient.getIdToken()) ?? '';
-	console.log(token != '' ? 'Successful token grab' : 'No token');
-	console.log(token);
 	const rawModels = await fetch('https://docs.sunnypilot.ai/driving_models.json');
 	const jsonModels = await rawModels.json();
 	const parsedModels: { [key: string]: Model } = jsonModels;
@@ -18,5 +16,6 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 		}
 	}
 	models.reverse();
+	console.log(locals.user);
 	return { user: locals.user, token, models };
 };
