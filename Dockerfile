@@ -1,8 +1,8 @@
 # syntax = docker/dockerfile:1
 
-# Adjust DENO_VERSION as desired
-ARG DENO_VERSION=2.0.3
-FROM denoland/deno:${DENO_VERSION} AS base
+# Adjust NODE_VERSION as desired
+ARG NODE_VERSION=22.14.0
+FROM node:${NODE_VERSION}-slim AS base
 
 LABEL fly_launch_runtime="SvelteKit"
 
@@ -12,30 +12,40 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
+# Install pnpm
+ARG PNPM_VERSION=9.12.3
+RUN npm install -g pnpm@$PNPM_VERSION
+
+
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
-# Install packages needed for build (if any)
+# Install packages needed to build node modules
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential
+    apt-get install --no-install-recommends -y build-essential node-gyp pkg-config python-is-python3
+
+# Install node modules
+COPY .npmrc package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile --prod=false
 
 # Copy application code
-COPY . .
+COPY --link . .
 
-# Cache dependencies and build application
-RUN deno cache --unstable ./src/**/*.ts
-RUN deno task build
+# Build application
+RUN pnpm run build
+
+# Remove development dependencies
+RUN pnpm prune --prod
+
 
 # Final stage for app image
-FROM base
+FROM base AS runner
 
-# Copy built application and necessary files
-COPY --from=build /app/.svelte-kit/output /app/.svelte-kit/output
-COPY --from=build /app/static /app/static
-COPY --from=build /app/svelte.config.js /app/svelte.config.js
-COPY --from=build /app/deno.json /app/deno.json
-COPY --from=build /app/vite.config.ts /app/vite.config.ts
+# Copy built application
+COPY --from=build /app/build ./build
+COPY --from=build /app/node_modules ./node_modules
+COPY --from=build /app/package.json ./package.json
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD [ "deno", "run", "--allow-net", "--allow-env", "--allow-read", ".svelte-kit/output/server/index.js" ]
+CMD ["node", "build"]
