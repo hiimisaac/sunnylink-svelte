@@ -97,38 +97,42 @@
 
 		<dialog id="my_modal_1" class="modal" class:modal-open={isModalOpen}>
 			<div class="modal-box">
-				<h3 class="text-lg font-bold">Change Driving Modal</h3>
-				<p class="py-4">
-					{#if allDevices.length >= 1}
-						<select class="select" bind:value={selectedDevice}>
-							<option disabled selected>Device</option>
-							{#each allDevices as device}
-								<option value={device.device_id}>{device.device_id}</option>
-							{/each}
-						</select>
-					{:else}
-						No devices found
-					{/if}
-				</p>
-				<p>
-					{#if data.models}
-						<select class="select" bind:value={selectedModel}>
-							<option disabled selected>Model</option>
-							{#each data.models as validatedModels}
-								<option value={validatedModels.index}>{validatedModels.display_name}</option>
-							{/each}
-						</select>
-					{/if}
-				</p>
-				<div class="modal-action">
-					<form method="dialog">
-						<!-- if there is a button in form, it will close the modal -->
-						<button class="btn" onclick={() => (isModalOpen = !isModalOpen)}>Close</button>
-						<button class="btn btn-primary" onclick={async () => await sendNewModelToDevice()}
-							>Send it 🚀</button
-						>
-					</form>
-				</div>
+				{#if allDevices.length <= 0}
+					<p>We're working to get your device and models! Bear with us!</p>
+				{:else}
+					<h3 class="text-lg font-bold">Change Driving Modal</h3>
+					<p class="py-4">
+						{#if allDevices.length >= 1}
+							<select class="select" bind:value={selectedDevice}>
+								<option disabled selected>Device</option>
+								{#each allDevices as device}
+									<option value={device.device_id}>{device.device_id}</option>
+								{/each}
+							</select>
+						{:else}
+							No devices found
+						{/if}
+					</p>
+					<p>
+						{#if data.models}
+							<select class="select" bind:value={selectedModel}>
+								<option disabled selected>Model</option>
+								{#each data.models as validatedModels}
+									<option value={validatedModels.index}>{validatedModels.display_name}</option>
+								{/each}
+							</select>
+						{/if}
+					</p>
+					<div class="modal-action">
+						<form method="dialog">
+							<!-- if there is a button in form, it will close the modal -->
+							<button class="btn" onclick={() => (isModalOpen = !isModalOpen)}>Close</button>
+							<button class="btn btn-primary" onclick={async () => await sendNewModelToDevice()}
+								>Send it 🚀</button
+							>
+						</form>
+					</div>
+				{/if}
 			</div>
 		</dialog>
 		<button class="btn btn-ghost btn-circle" aria-label="notification">

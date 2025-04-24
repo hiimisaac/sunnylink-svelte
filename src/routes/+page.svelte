@@ -5,7 +5,7 @@
 <div class="bg-base-200 min-h-screen">
 	<div class="hero bg-base-200">
 		<div class="hero-content text-center">
-			<div class="max-w-md lg:max-w-lg">
+			<div class="lg:max-w-lg lg:max-w-md">
 				<h1 class="text-6xl font-semibold">Enjoy driving like never before</h1>
 				<p class="py-6">
 					Unparalleled development principles. Stability beyond limits. Community-driven always.
@@ -14,7 +14,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="mx-auto px-15 py-6 xl:max-w-3/4">
+	<div class="mx-auto px-15 py-6 lg:max-w-3/4">
 		<div class="mockup-browser border-base-300 mx-auto rounded-3xl border shadow-2xl">
 			<div class="mockup-browser-toolbar">
 				<div class="input">https://github.com/sunnypilot/sunnypilot</div>
@@ -107,7 +107,7 @@
 		</div>
 	</div>
 	<div
-		class="mx-auto grid w-full grid-cols-3 place-items-center justify-center gap-x-15 xl:max-w-3/5"
+		class="mx-auto grid place-items-center justify-center gap-x-15 lg:w-full lg:max-w-3/5 lg:grid-cols-3"
 	>
 		<div class="card bg-base-100 w-96 shadow-sm">
 			<figure class="px-10 pt-10">
@@ -170,13 +170,13 @@
 		</div>
 	</div>
 	<div class="mx-auto w-full place-content-center py-6 xl:max-w-2/3">
-		<div class="tabs tabs-box">
+		<div class="tabs tabs-box p-5">
 			<input type="radio" name="my_tabs_6" class="tab" aria-label="Release" checked />
 			<div class="tab-content bg-base-100 border-base-300 p-6">
 				<div class="mockup-window bg-base-100 border-base-300 border">
-					<div class="grid h-80 px-10">
+					<div class="mx-auto grid h-80 px-10">
 						<h1 class="text-3xl font-bold">Why use release?</h1>
-						<ol class="list-inside list-decimal">
+						<ol class="mx-auto list-inside list-decimal">
 							<li>
 								Stability! The Release branch is our most consistent, with a nonzero probability of
 								introducing regressions. We've spent considerable resources developing a strong
@@ -268,8 +268,8 @@
 			<div class="badge badge-soft badge-primary badge-xl">FAQ</div>
 		</div>
 	</div>
-	<div class="mx-auto grid grid-cols-2 xl:max-w-3/5">
-		<img src={img} alt="astronaut" class="h-1/2 bg-transparent" />
+	<div class="mx-auto grid lg:grid-cols-2 xl:max-w-3/5">
+		<img src={img} alt="astronaut" class="bg-transparent lg:h-1/2" />
 
 		<div class="p-6">
 			<details class="bg-base-100 border-base-300 collapse border">
