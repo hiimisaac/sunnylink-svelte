@@ -16,6 +16,5 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 		}
 	}
 	models.reverse();
-	console.log(locals.user);
 	return { user: locals.user, token, models };
 };
