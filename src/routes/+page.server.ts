@@ -5,11 +5,10 @@ export const actions: Actions = {
 	signIn: async ({ locals }) => {
 		await locals.logtoClient.signIn({
 			redirectUri: env.LOGTO_REDIRECT,
-			postRedirectUri: env.LOGTO_LOGOUT_URI
+			postRedirectUri: '/'
 		});
 	},
 	signOut: async ({ locals }) => {
-		const baseUrl = env.LOGTO_REDIRECT;
-		await locals.logtoClient.signOut(baseUrl);
+		await locals.logtoClient.signOut();
 	}
 };
