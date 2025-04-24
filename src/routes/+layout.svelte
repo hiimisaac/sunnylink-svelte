@@ -21,7 +21,6 @@
 			const devices = await sunnylinkClient.GET('/users/{userId}/devices', {
 				params: { path: { userId: 'self' } }
 			});
-			console.log(devices);
 			allDevices = devices.data!;
 		}
 	}
