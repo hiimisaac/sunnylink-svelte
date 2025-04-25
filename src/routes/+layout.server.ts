@@ -9,7 +9,7 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 	}
 
 	const token = (await locals.logtoClient.getIdToken()) ?? '';
-	const rawModels = await fetch('https://docs.sunnypilot.ai/driving_models.json');
+	const rawModels = await fetch('https://docs.sunnypilot.ai/driving_models_v2.json');
 	const jsonModels = await rawModels.json();
 	const parsedModels: { [key: string]: Model } = jsonModels;
 	const models: Model[] = [];
