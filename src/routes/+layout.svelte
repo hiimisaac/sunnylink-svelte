@@ -4,11 +4,14 @@
 	import { Toaster, toast } from 'svelte-sonner';
 	import { type Device } from '$lib/types/types';
 	import '../app.css';
+	import { isHttpError } from '@sveltejs/kit';
+	import { error } from 'openapi-typescript';
 
 	let isModalOpen = $state(false);
 	let allDevices = $state<Device>([]);
 	let selectedModel = $state<number>();
 	let selectedDevice = $state<string>();
+	let sendingModel = $state<Boolean>();
 
 	let { data, children } = $props();
 
@@ -27,6 +30,7 @@
 
 	async function sendNewModelToDevice() {
 		try {
+			sendingModel = true;
 			const response = await sunnylinkClient.POST('/settings/{deviceId}', {
 				params: {
 					path: {
@@ -47,7 +51,8 @@
 			}
 			isModalOpen = !isModalOpen;
 
-			toast.success('New Model loaded. Drive safely! 🚗💨');
+			toast.success('Download requested. Check your device for current status. Drive safely! 🚗💨');
+			sendingModel = false;
 		} catch (error) {
 			toast.error('Ah nuts 🔩. We encountered an error');
 			console.error('Error:', error);
@@ -100,18 +105,14 @@
 				{#if allDevices.length <= 0}
 					<p>We're working to get your device and models! Bear with us!</p>
 				{:else}
-					<h3 class="text-lg font-bold">Change Driving Modal</h3>
+					<h3 class="text-lg font-bold">Change Driving Model</h3>
 					<p class="py-4">
-						{#if allDevices.length >= 1}
-							<select class="select" bind:value={selectedDevice}>
-								<option disabled selected>Device</option>
-								{#each allDevices as device}
-									<option value={device.device_id}>{device.device_id}</option>
-								{/each}
-							</select>
-						{:else}
-							No devices found
-						{/if}
+						<select class="select" bind:value={selectedDevice}>
+							<option disabled selected>Device</option>
+							{#each allDevices as device}
+								<option value={device.device_id}>{device.device_id}</option>
+							{/each}
+						</select>
 					</p>
 					<p>
 						{#if data.models}
@@ -127,34 +128,47 @@
 						<form method="dialog">
 							<!-- if there is a button in form, it will close the modal -->
 							<button class="btn" onclick={() => (isModalOpen = !isModalOpen)}>Close</button>
-							<button class="btn btn-primary" onclick={async () => await sendNewModelToDevice()}
-								>Send it 🚀</button
-							>
+							{#if sendingModel}
+								<button class="btn btn-disabled">
+									<span class="loading loading-spinner"></span>
+									Making magic happen...
+								</button>
+							{:else}
+								<button class="btn btn-primary" onclick={async () => await sendNewModelToDevice()}
+									>Send it 🚀</button
+								>
+							{/if}
 						</form>
 					</div>
 				{/if}
 			</div>
 		</dialog>
-		<button class="btn btn-ghost btn-circle" aria-label="notification">
-			<div class="indicator">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-5 w-5"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-					/>
-				</svg>
+		{#if data.user}
+			<button class="btn btn-ghost btn-circle" aria-label="notification">
+				<div class="indicator">
+					{#if data.user?.picture}
+						<img src={data.user.picture} alt="SSO avatar" class="rounded-4xl" />
+					{:else}
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							class="h-5 w-5"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+							/>
+						</svg>
+					{/if}
 
-				<span class="badge badge-xs badge-primary indicator-item"></span>
-			</div>
-		</button>
+					<span class="badge badge-xs badge-primary indicator-item"></span>
+				</div>
+			</button>
+		{/if}
 	</div>
 </div>
 {@render children()}
