@@ -4,8 +4,6 @@
 	import { Toaster, toast } from 'svelte-sonner';
 	import { type Device } from '$lib/types/types';
 	import '../app.css';
-	import { isHttpError } from '@sveltejs/kit';
-	import { error } from 'openapi-typescript';
 
 	let isModalOpen = $state(false);
 	let allDevices = $state<Device>([]);
