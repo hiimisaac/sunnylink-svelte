@@ -24,6 +24,7 @@
 		"openapi-fetch": "^0.13.5",
 		"openapi-typescript": "^7.6.1",
 		"svelte-sonner": "^0.3.28",
+		"theme-change": "^2.5.0",
 		"vite-plugin-node-polyfills": "^0.23.0",
 		"zod": "^3.24.2"
 	},

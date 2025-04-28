@@ -9,6 +9,6 @@ export const actions: Actions = {
 		});
 	},
 	signOut: async ({ locals }) => {
-		await locals.logtoClient.signOut();
+		await locals.logtoClient.signOut(env.LOGTO_LOGOUT_URI);
 	}
 };
