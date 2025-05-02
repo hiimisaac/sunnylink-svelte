@@ -9,6 +9,7 @@ export const actions: Actions = {
 		});
 	},
 	signOut: async ({ locals }) => {
+		console.log('Try');
 		await locals.logtoClient.signOut(env.LOGTO_LOGOUT_URI);
 	}
 };
