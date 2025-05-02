@@ -168,15 +168,23 @@
 				<div tabindex="0" role="button" class="btn btn-ghost btn-circle">
 					<img src={data.user.picture} alt="SSO avatar" class="rounded-4xl" />
 				</div>
-
 				<form method="POST" action="?/signOut">
-					<button type="submit">Logout</button>
+					<ul
+						tabindex="-1"
+						class="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow"
+					>
+						<li>
+							<button type="submit">Logout</button>
+						</li>
+						<li>
+							<ThemeToggle
+								onThemeChanged={() => {
+									determineCurrentLogoColor();
+								}}
+							/>
+						</li>
+					</ul>
 				</form>
-				<ThemeToggle
-					onThemeChanged={() => {
-						determineCurrentLogoColor();
-					}}
-				/>
 			</div>
 		{/if}
 	</div>
