@@ -173,7 +173,7 @@
 					class="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow"
 				>
 					<li>
-						<form method="POST" action="?/{data.user ? 'signOut' : 'signIn'}">
+						<form method="POST" action="?/signOut">
 							<button type="submit">Logout</button>
 						</form>
 					</li>

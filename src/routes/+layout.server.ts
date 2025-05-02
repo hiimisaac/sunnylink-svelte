@@ -24,3 +24,16 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 	models.reverse();
 	return { user: locals.user, token, models };
 };
+
+export const actions: Actions = {
+	signIn: async ({ locals }) => {
+		await locals.logtoClient.signIn({
+			redirectUri: env.LOGTO_REDIRECT,
+			postRedirectUri: '/'
+		});
+	},
+	signOut: async ({ locals }) => {
+		console.log('Try');
+		await locals.logtoClient.signOut(env.LOGTO_LOGOUT_URI);
+	}
+};
