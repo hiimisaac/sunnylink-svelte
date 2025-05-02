@@ -173,7 +173,9 @@
 					class="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow"
 				>
 					<li>
-						<form method="POST" action="?/{data.user ? 'signOut' : 'signIn'}">Logout</form>
+						<form method="POST" action="?/{data.user ? 'signOut' : 'signIn'}">
+							<button type="submit">Logout</button>
+						</form>
 					</li>
 					<li>
 						<ThemeToggle
