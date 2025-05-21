@@ -109,8 +109,8 @@
 		<div class="card bg-base-100 w-full shadow-sm">
 			<figure class="px-6 pt-6">
 				<img
-					src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-					alt="Shoes"
+					src="https://placehold.co/600x400/EEE/31343C?text=Dynamic+Experimental+Control"
+					alt="Dynamic Experimental Control"
 					class="w-full rounded-xl"
 				/>
 			</figure>
@@ -126,8 +126,8 @@
 		<div class="card bg-base-100 w-full shadow-sm">
 			<figure class="px-6 pt-6">
 				<img
-					src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-					alt="Shoes"
+					src="https://placehold.co/600x400/EEE/31343C?text=MADS+Feature"
+					alt="MADS"
 					class="w-full rounded-xl"
 				/>
 			</figure>
@@ -143,8 +143,8 @@
 		<div class="card bg-base-100 w-full shadow-sm">
 			<figure class="px-6 pt-6">
 				<img
-					src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-					alt="Shoes"
+					src="https://placehold.co/600x400/EEE/31343C?text=Forced+Car+Recognition"
+					alt="Forced Car Recognition"
 					class="w-full rounded-xl"
 				/>
 			</figure>

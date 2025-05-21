@@ -103,6 +103,8 @@
 				<li><a href="/">Homepage</a></li>
 				<li><a href="/sunnylink">sunnylink</a></li>
 				<li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/about-us">About Us</a></li>
+        <li><a href="/privacy-policy">Privacy Policy</a></li>
 			</ul>
 		</div>
 	</div>
@@ -209,14 +211,14 @@
 
 	<nav>
 		<h6 class="footer-title">Company</h6>
-		<a class="link link-hover">About us</a>
+        <a class="link link-hover" href="/about-us">About us</a>
 		<a class="link link-hover" href="https://github.com/sunnypilot/sunnypilot">Github</a>
 		<a class="link link-hover" href="https://discord.gg/sunnypilot">Discord</a>
 	</nav>
 	<nav>
 		<h6 class="footer-title">Legal</h6>
 		<a class="link link-hover">Terms of use</a>
-		<a class="link link-hover">Privacy policy</a>
+        <a class="link link-hover" href="/privacy-policy">Privacy policy</a>
 		<a class="link link-hover">Cookie policy</a>
 	</nav>
 </footer>
