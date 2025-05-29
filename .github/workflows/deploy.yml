@@ -1,44 +1,56 @@
-name: Deploy
+name: Deploy to GitHub Pages
+
 on:
   push:
-    branches: main
-  pull_request:
-    branches: main
+    branches: 'main'
 
 jobs:
-  deploy:
-    name: Deploy
+  build_site:
     runs-on: ubuntu-latest
-
-    permissions:
-      id-token: write # Needed for auth with Deno Deploy
-      contents: read # Needed to clone the repository
-
     steps:
-      - name: Clone repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Deno
-        uses: denoland/setup-deno@v2
-        with:
-          deno-version: v2.x
+      # If you're using pnpm, add this step then change the commands and cache key below to use `pnpm`
+      # - name: Install pnpm
+      #   uses: pnpm/action-setup@v3
+      #   with:
+      #     version: 8
 
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+ node-version: 20
+ cache: npm
 
-      - name: Install step
-        run: "npm install"
+      - name: Install dependencies
+        run: npm install
 
-      - name: Build step
-        run: "npm run build"
+      - name: build
+        env:
+ BASE_PATH: '/${{ github.event.repository.name }}'
+        run: |
+ npm run build
 
-      - name: Upload to Deno Deploy
-        uses: denoland/deployctl@v1
+      - name: Upload Artifacts
+        uses: actions/upload-pages-artifact@v3
         with:
-          project: "sunnylink-svelte"
-          entrypoint: "mod.ts"
-          root: "build"
-          
-          
+ # this should match the `pages` option in your adapter-static options
+ path: 'build/'
+
+  deploy:
+    needs: build_site
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
