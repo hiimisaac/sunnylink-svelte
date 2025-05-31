@@ -28,6 +28,12 @@ jobs:
       - name: build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
+          LOGTO_ENDPOINT: ${{ secrets.LOGTO_ENDPOINT }}
+          LOGTO_APP_ID: ${{ secrets.LOGTO_APP_ID }}
+          LOGTO_APP_SECRET: ${{ secrets.LOGTO_APP_SECRET }}
+          LOGTO_COOKIE_ENCRYPTION_KEY: ${{ secrets.LOGTO_COOKIE_ENCRYPTION_KEY }}
+          LOGTO_REDIRECT: ${{ secrets.LOGTO_REDIRECT }} # Note: This might be public, consider if it needs to be a secret
+          LOGTO_LOGOUT_URI: ${{ secrets.LOGTO_LOGOUT_URI }} # Note: This might be public, consider if it needs to be a secret
         run: |
           pnpm run build
 
