@@ -35,6 +35,17 @@ jobs:
           LOGTO_REDIRECT: ${{ secrets.LOGTO_REDIRECT }} # Note: This might be public, consider if it needs to be a secret
           LOGTO_LOGOUT_URI: ${{ secrets.LOGTO_LOGOUT_URI }} # Note: This might be public, consider if it needs to be a secret
         run: |
+          # Example: Echoing the environment variables to confirm they are set (optional, for debugging)
+          echo "BASE_PATH is: $BASE_PATH"
+          echo "LOGTO_ENDPOINT is available (length): ${#LOGTO_ENDPOINT}" # Check length to avoid printing the secret
+          echo "LOGTO_APP_ID is available (length): ${#LOGTO_APP_ID}"
+          echo "LOGTO_APP_SECRET is available (length): ${#LOGTO_APP_SECRET}"
+          echo "LOGTO_COOKIE_ENCRYPTION_KEY is available (length): ${#LOGTO_COOKIE_ENCRYPTION_KEY}"
+          echo "LOGTO_REDIRECT is: $LOGTO_REDIRECT" # Echoing as this might be a public URL
+          echo "LOGTO_LOGOUT_URI is: $LOGTO_LOGOUT_URI" # Echoing as this might be a public URL
+          echo "COMMIT_SHA is: $COMMIT_SHA"
+          echo "Building the site..."
+          # Your actual build command
           pnpm run build
 
       - name: Upload Artifacts
