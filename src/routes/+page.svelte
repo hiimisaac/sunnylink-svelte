@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import img from '$lib/images/smiling-astro.png';
 </script>
 
