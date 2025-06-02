@@ -5,7 +5,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		paths: {
-			base: '/sunnylink-svelte/'
+			base: '/sunnylink-svelte'
 		}
 	}
 };
