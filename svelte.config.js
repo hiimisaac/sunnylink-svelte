@@ -11,7 +11,9 @@ const config = {
                paths: {
                        base: '/sunnylink-svelte'
                },
+
                // Build purely static files. SSR is disabled at the route level
+
        }
 };
 
