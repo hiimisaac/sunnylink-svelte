@@ -11,8 +11,9 @@ const config = {
                paths: {
                        base: '/sunnylink-svelte'
                },
-               // Disable server side rendering so the build works as a pure SPA
-               ssr: false
+
+               // Build purely static files. SSR is disabled at the route level
+
        }
 };
 
