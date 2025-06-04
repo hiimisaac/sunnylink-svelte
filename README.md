@@ -11,4 +11,4 @@ pnpm build
 
 The static adapter emits a `404.html` file so that GitHub Pages can redirect all
 routes back to the SPA entry. Server-side rendering is disabled in
-`src/routes/+layout.ts` to ensure the site runs completely on the client.
+`src/routes/+layout.ts` to ensure the site runs completely on the client...
