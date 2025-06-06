@@ -9,6 +9,7 @@
 	import { getCurrentTheme } from '$lib/utils/themeFetcher';
 	import darkLogo from '$lib/images/sp_white_transparent.png';
 	import lightLogo from '$lib/images/sp_black_transparent.png';
+	import { PUBLIC_CALLBACK, PUBLIC_REDIRECT } from '$env/static/public';
 
 	let isModalOpen = $state(false);
 	let allDevices = $state<Device>([]);
@@ -41,11 +42,11 @@
 	});
 
 	async function signIn() {
-		await data.logtoClient?.signIn('http://localhost:5173/sunnylink-svelte/callback');
+		await data.logtoClient?.signIn(PUBLIC_CALLBACK);
 	}
 
 	async function signOut() {
-		await data.logtoClient?.signOut('http://localhost:5173');
+		await data.logtoClient?.signOut(PUBLIC_REDIRECT);
 	}
 
 	async function checkForSubmit(e: MouseEvent) {
