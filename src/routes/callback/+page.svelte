@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import { browser } from '$app/environment';
+	let { data } = $props();
 
-	let status = 'Processing authentication...';
+	let status = $state<string>('Processing authentication...');
 	let error = null;
 
 	// Run immediately when the script loads (not in onMount)
@@ -32,13 +33,10 @@
 
 			// Initialize Logto client
 			const { default: LogtoClient } = await import('@logto/browser');
-			const logtoClient = new LogtoClient({
-				endpoint: 'your-logto-endpoint', // Replace with actual
-				appId: 'your-app-id' // Replace with actual
-			});
+			const logtoClient = data.logtoClient;
 
 			// Handle the callback
-			await logtoClient.handleSignInCallback(window.location.href);
+			await logtoClient?.handleSignInCallback(window.location.href);
 
 			status = 'Authentication successful! Redirecting...';
 			console.log('Auth successful, redirecting...');
