@@ -18,4 +18,4 @@
 	});
 </script>
 
-<div>Redirection...</div>
+<div>Redirecting...</div>
