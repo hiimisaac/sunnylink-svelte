@@ -1,27 +1,80 @@
 <script lang="ts">
-	import { PUBLIC_CALLBACK, PUBLIC_LOGTO_APP_ID, PUBLIC_LOGTO_ENDPOINT } from '$env/static/public';
-	import LogtoClient from '@logto/browser';
-	import { onMount } from 'svelte';
+	import { base } from '$app/paths';
+	import { browser } from '$app/environment';
 
-	let { data } = $props();
-	let loading = true;
+	let status = 'Processing authentication...';
 	let error = null;
 
-	onMount(async () => {
+	// Run immediately when the script loads (not in onMount)
+	if (browser && typeof window !== 'undefined') {
+		processAuth();
+	}
+
+	async function processAuth() {
 		try {
+			// Add delay to ensure page is fully loaded
+			await new Promise((resolve) => setTimeout(resolve, 500));
+
+			console.log('Processing auth callback');
+			console.log('Current URL:', window.location.href);
+
+			// Check if we have the required parameters
+			const urlParams = new URLSearchParams(window.location.search);
+			const code = urlParams.get('code');
+			const state = urlParams.get('state');
+
+			console.log('Code:', code);
+			console.log('State:', state);
+
+			if (!code) {
+				throw new Error('No authorization code found');
+			}
+
+			// Initialize Logto client
+			const { default: LogtoClient } = await import('@logto/browser');
 			const logtoClient = new LogtoClient({
-				endpoint: PUBLIC_LOGTO_ENDPOINT,
-				appId: PUBLIC_LOGTO_APP_ID
+				endpoint: 'your-logto-endpoint', // Replace with actual
+				appId: 'your-app-id' // Replace with actual
 			});
 
-			await logtoClient?.handleSignInCallback(PUBLIC_CALLBACK);
+			// Handle the callback
+			await logtoClient.handleSignInCallback(window.location.href);
 
-			window.location.assign('/');
+			status = 'Authentication successful! Redirecting...';
+			console.log('Auth successful, redirecting...');
+
+			// Force redirect after a short delay
+			setTimeout(() => {
+				const redirectUrl = base ? `${base}/` : '/';
+				console.log('Redirecting to:', redirectUrl);
+				window.location.replace(redirectUrl);
+			}, 1000);
 		} catch (err) {
-			console.log(err);
-			loading = false;
+			console.error('Auth callback error:', err);
+			error = err.message;
+			status = 'Authentication failed';
 		}
-	});
+	}
 </script>
 
-<div>Redirecting...</div>
+<!-- Add this to force the script to run -->
+<svelte:window />
+
+<div style="padding: 20px; text-align: center;">
+	<h1>Authentication</h1>
+	<p>{status}</p>
+
+	{#if error}
+		<div style="color: red; margin: 20px 0;">
+			<p>Error: {error}</p>
+			<a href={base || '/'} style="color: blue;">Return to home</a>
+		</div>
+	{/if}
+
+	<!-- Loading indicator -->
+	<div style="margin: 20px 0;">
+		<div
+			style="display: inline-block; width: 20px; height: 20px; border: 3px solid #f3f3f3; border-top: 3px solid #3498db; border-radius: 50%; animation: spin 1s linear infinite;"
+		></div>
+	</div>
+</div>
