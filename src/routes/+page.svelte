@@ -346,7 +346,7 @@
 						<a href="https://termius.com/"> <img src={terminus} alt="terminus logo" /></a>
 					</div>
 				</div>
-				<p class="text-2xl">Terminus</p>
+				<p class="text-2xl">Termius</p>
 			</div>
 		</div>
 	</div>
