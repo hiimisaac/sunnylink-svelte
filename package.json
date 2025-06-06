@@ -18,6 +18,7 @@
 		"gen-types": "npx openapi-typescript https://docs.sunnypilot.ai/driving_models.json -o .src/lib/types/generated/model-schema.d.ts"
 	},
 	"dependencies": {
+		"@logto/browser": "^3.0.8",
 		"@logto/sveltekit": "^0.3.16",
 		"@sveltejs/adapter-node": "^5.2.12",
 		"buffer": "^6.0.3",

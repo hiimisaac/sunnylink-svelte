@@ -2,7 +2,7 @@
 	import { createAuthMiddleware } from '$lib/api/auth';
 	import { sunnylinkClient } from '$lib/api/client';
 	import { Toaster, toast } from 'svelte-sonner';
-	import { type Device } from '$lib/types/types';
+	import { type Device, type Model } from '$lib/types/types';
 	import '../app.css';
 	import ThemeToggle from '$lib/components/theme-toggle.svelte';
 	import { onMount } from 'svelte';
@@ -20,17 +20,47 @@
 	let theme = $state('');
 
 	let { data, children } = $props();
+	let models: Model[] = [];
+
+	onMount(async () => {
+		if (data.user) {
+			const modelsResponse = await fetch('https://docs.sunnypilot.ai/driving_models_v2.json');
+			const modelsJson = await modelsResponse.json();
+			const parsedModels: { [key: string]: Model } = modelsJson;
+			const models: Model[] = [];
+			for (const key in parsedModels) {
+				if (Object.prototype.hasOwnProperty.call(parsedModels, key)) {
+					const newObject = { ...parsedModels[key], model_name: key };
+					if (newObject) {
+						models.push(newObject);
+					}
+				}
+			}
+			models.reverse();
+		}
+	});
+
+	async function signIn() {
+		await data.logtoClient?.signIn('http://localhost:5173/sunnylink-svelte/callback');
+	}
+
+	async function signOut() {
+		await data.logtoClient?.signOut('http://localhost:5173');
+	}
 
 	async function checkForSubmit(e: MouseEvent) {
 		if (data.user) {
 			e.preventDefault();
 			isModalOpen = !isModalOpen;
-			const authMiddleware = createAuthMiddleware(data.token);
+			const idToken = await data.logtoClient.getIdToken();
+			const authMiddleware = createAuthMiddleware(idToken ?? '');
 			sunnylinkClient.use(authMiddleware);
 			const devices = await sunnylinkClient.GET('/users/{userId}/devices', {
 				params: { path: { userId: 'self' } }
 			});
 			allDevices = devices.data!;
+		} else {
+			signIn();
 		}
 	}
 
@@ -114,11 +144,9 @@
 		{/if}
 	</div>
 	<div class="navbar-end">
-		<form method="POST" action="?/{data.user ? 'signOut' : 'signIn'}" class="px-5">
-			<button class="btn btn-ghost" type="submit" onclick={(event) => checkForSubmit(event)}
-				>Change Driving Model</button
-			>
-		</form>
+		<button class="btn btn-ghost" type="submit" onclick={(event) => checkForSubmit(event)}
+			>Change Driving Model</button
+		>
 
 		<dialog id="my_modal_1" class="modal" class:modal-open={isModalOpen}>
 			<div class="modal-box">
@@ -135,10 +163,10 @@
 						</select>
 					</p>
 					<p>
-						{#if data.models}
+						{#if models}
 							<select class="select" bind:value={selectedModel}>
 								<option disabled selected>Model</option>
-								{#each data.models as validatedModels}
+								{#each models as validatedModels}
 									<option value={validatedModels.index}>{validatedModels.display_name}</option>
 								{/each}
 							</select>
