@@ -49,7 +49,7 @@
 	}
 
 	async function checkForSubmit(e: MouseEvent) {
-		if (data.user) {
+		if (data.isAuthenticated) {
 			e.preventDefault();
 			isModalOpen = !isModalOpen;
 			const idToken = await data.logtoClient.getIdToken();
@@ -196,23 +196,21 @@
 				<div tabindex="0" role="button" class="btn btn-ghost btn-circle">
 					<img src={data.user.picture} alt="SSO avatar" class="rounded-4xl" />
 				</div>
-				<form method="POST" action="?/signOut">
-					<ul
-						tabindex="-1"
-						class="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow"
-					>
-						<li>
-							<button type="submit">Logout</button>
-						</li>
-						<li>
-							<ThemeToggle
-								onThemeChanged={() => {
-									determineCurrentLogoColor();
-								}}
-							/>
-						</li>
-					</ul>
-				</form>
+				<ul
+					tabindex="-1"
+					class="menu menu-sm dropdown-content bg-base-200 rounded-box z-1 mt-3 w-52 p-2 shadow"
+				>
+					<li>
+						<button onclick={signOut}>Logout</button>
+					</li>
+					<li>
+						<ThemeToggle
+							onThemeChanged={() => {
+								determineCurrentLogoColor();
+							}}
+						/>
+					</li>
+				</ul>
 			</div>
 		{/if}
 	</div>
