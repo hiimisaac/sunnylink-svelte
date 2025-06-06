@@ -1,5 +1,6 @@
 <script lang="ts">
 	import img from '$lib/images/smiling-astro.png';
+	import terminus from '$lib/images/termius-icon-256.png';
 </script>
 
 <div class="bg-base-200 min-h-screen">
@@ -327,6 +328,22 @@
 						portal for setting your preferences from device, so be on the lookout!
 					</div>
 				</details>
+			</div>
+		</div>
+	</div>
+	<div class="mx-auto">
+		<div class="mx-auto w-full py-6 text-center">
+			<div class="badge badge-soft badge-accent badge-xl">SPONSORS</div>
+			<p class="text-sm font-semibold">
+				We're so thankful for all our sponsors. You enable us to do everything. From the bottom of
+				our hearts, thank you!
+			</p>
+		</div>
+		<div class="flex justify-center pb-5">
+			<div class="avatar">
+				<div class="w-24 rounded-4xl">
+					<img src={terminus} alt="terminus logo" />
+				</div>
 			</div>
 		</div>
 	</div>
