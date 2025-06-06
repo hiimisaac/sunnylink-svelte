@@ -340,10 +340,13 @@
 			</p>
 		</div>
 		<div class="flex justify-center pb-5">
-			<div class="avatar">
-				<div class="w-24 rounded-4xl">
-					<img src={terminus} alt="terminus logo" />
+			<div>
+				<div class="avatar">
+					<div class="w-24 rounded-4xl">
+						<a href="https://termius.com/"> <img src={terminus} alt="terminus logo" /></a>
+					</div>
 				</div>
+				<p class="text-2xl">Terminus</p>
 			</div>
 		</div>
 	</div>
