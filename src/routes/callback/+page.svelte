@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { PUBLIC_CALLBACK } from '$env/static/public';
 	import { onMount } from 'svelte';
 
 	let { data } = $props();
@@ -7,11 +8,9 @@
 
 	onMount(async () => {
 		try {
-			// Handle the callback
-			await data.logtoClient?.handleSignInCallback(window.location.href);
+			await data.logtoClient?.handleSignInCallback(PUBLIC_CALLBACK);
 
-			// Redirect to your main app
-			window.location.assign('/'); // or wherever you want to go
+			window.location.assign('/');
 		} catch (err) {
 			console.log(err);
 			loading = false;
