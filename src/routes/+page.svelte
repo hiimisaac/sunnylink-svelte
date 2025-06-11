@@ -1,6 +1,9 @@
 <script lang="ts">
 	import img from '$lib/images/smiling-astro.png';
 	import terminus from '$lib/images/termius-icon-256.png';
+	import dec from '$lib/images/DEC-new.png';
+	import fcr from '$lib/images/FCR-new.png';
+	import mads from '$lib/images/MADS-new.png';
 </script>
 
 <div class="bg-base-200 min-h-screen">
@@ -109,11 +112,7 @@
 	>
 		<div class="card bg-base-100 w-full shadow-sm">
 			<figure class="px-6 pt-6">
-				<img
-					src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-					alt="Shoes"
-					class="w-full rounded-xl"
-				/>
+				<img src={dec} alt="dec" class="w-full rounded-xl" />
 			</figure>
 			<div class="card-body items-center text-center">
 				<h2 class="card-title h-16 text-xl">Dynamic Experimental Control</h2>
@@ -126,11 +125,7 @@
 		</div>
 		<div class="card bg-base-100 w-full shadow-sm">
 			<figure class="px-6 pt-6">
-				<img
-					src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-					alt="Shoes"
-					class="w-full rounded-xl"
-				/>
+				<img src={mads} alt="mads" class="w-full rounded-xl" />
 			</figure>
 			<div class="card-body items-center text-center">
 				<h2 class="card-title h-16 text-xl">MADS</h2>
@@ -143,11 +138,7 @@
 		</div>
 		<div class="card bg-base-100 w-full shadow-sm">
 			<figure class="px-6 pt-6">
-				<img
-					src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-					alt="Shoes"
-					class="w-full rounded-xl"
-				/>
+				<img src={fcr} alt="fcr" class="w-full rounded-xl" />
 			</figure>
 			<div class="card-body items-center text-center">
 				<h2 class="card-title h-16 text-xl">Forced Car Recognition</h2>
