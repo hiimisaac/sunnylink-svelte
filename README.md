@@ -67,13 +67,13 @@ The `src` directory contains the majority of the project's code. Here's a breakd
 
 *   `lib`: This directory contains the application's core logic, including API clients, components, and utility functions.
 *   `routes`: This directory contains the application's pages and API endpoints. SvelteKit uses a file-based routing system, so the structure of this directory determines the application's URLs.
-*   `components`: This directory contains reusable Svelte components that are used throughout the application.
 
+  
 ## Working with Svelte
 
 This project is built with SvelteKit, a framework for building web applications with Svelte. If you are new to Svelte, we recommend checking out the following resources:
 
-*   [Svelte Tutorial](httpss://svelte.dev/tutorial)
-*   [SvelteKit Documentation](httpss://kit.svelte.dev/docs)
+*   [Svelte Tutorial](https://svelte.dev/tutorial)
+*   [SvelteKit Documentation](https://kit.svelte.dev/docs)
 
 These resources will help you get up to speed with the basics of Svelte and SvelteKit, including components, reactivity, and lifecycle functions.
