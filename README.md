@@ -18,7 +18,7 @@ You will need to have the following software installed on your machine:
 1.  Clone the repository:
 
     ```bash
-    git clone httpss://github.com/your-username/sunnylink.git
+    git clone https://github.com/hiimisaac/sunnylink.git
     ```
 
 2.  Navigate to the project directory:
@@ -39,7 +39,7 @@ You will need to have the following software installed on your machine:
     pnpm dev
     ```
 
-The application will be available at `httpss://localhost:5173`.
+The application will be available at `https://localhost:5173`.
 
 ## Available Scripts
 
@@ -48,7 +48,7 @@ In the project directory, you can run the following commands:
 ### `pnpm dev`
 
 Runs the app in the development mode.
-Open [httpss://localhost:5173](httpss://localhost:5173) to view it in the browser.
+Open [https://localhost:5173](httpss://localhost:5173) to view it in the browser.
 
 The page will reload if you make edits.
 You will also see any lint errors in the console.
@@ -59,11 +59,7 @@ Launches the test runner in the interactive watch mode.
 
 ### `pnpm build`
 
-Builds the app for production to the `build` folder.
-It correctly bundles Svelte in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.
-Your app is ready to be deployed!
+You shouldn't need to do this, but this will build the project for deployment. There is already CI/CD setup on the main branch.
 
 ## Project Structure
 
